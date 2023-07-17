@@ -2,4 +2,4 @@
 
 ## Abstract
 
-![Go Hexa](https://github.com/yuttasakcom/go-hexa/blob/master/go-hexa.png?raw=true)
+![Go Hexa](https://github.com/yuttasakcom/go-hexa/blob/master/screenshots/go-hexa.png)
