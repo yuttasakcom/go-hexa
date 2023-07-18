@@ -18,6 +18,6 @@ func envFile() string {
 
 func main() {
 	cfg := config.NewConfig(envFile())
-	db := database.GormStoreConnect(cfg.Db())
-	server.NewServer(cfg, db).Start()
+	store := database.DatabaseConnect(cfg.Db())
+	server.NewServer(cfg, store).Start()
 }

@@ -5,7 +5,6 @@ import (
 	"github.com/yuttasakcom/go-hexa/app/database"
 	"github.com/yuttasakcom/go-hexa/app/router"
 	"github.com/yuttasakcom/go-hexa/app/todo"
-	"gorm.io/gorm"
 )
 
 type IServer interface {
@@ -14,21 +13,21 @@ type IServer interface {
 
 type server struct {
 	cfg config.IConfig
-	db  *gorm.DB
-	app *router.FiberRouter
+	db  *database.Store
+	app *router.App
 }
 
-func NewServer(cfg config.IConfig, db *gorm.DB) IServer {
+func NewServer(cfg config.IConfig, db *database.Store) IServer {
 	return &server{
 		cfg: cfg,
 		db:  db,
-		app: router.NewFiberRouter(),
+		app: router.NewApp(),
 	}
 }
 
 func (s *server) Start() {
-	gormStore := database.NewGormStore(s.db)
-	handler := todo.NewTodoHandler(gormStore)
+	todoModel := todo.NewTodoModel(s.db)
+	handler := todo.NewTodoHandler(todoModel)
 	s.app.Post("/todos", handler.Create)
 	s.app.Listen(s.cfg.App().Host())
 }

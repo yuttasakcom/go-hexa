@@ -1,8 +1,7 @@
 package todo
 
 type Todo struct {
-	Title     string `json:"title"`
-	Completed bool   `json:"completed"`
+	Title string `json:"title"`
 }
 
 type TodoError struct {

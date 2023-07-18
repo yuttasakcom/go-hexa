@@ -4,16 +4,12 @@ import (
 	"net/http"
 )
 
-type storer interface {
-	Create(todo *Todo) error
-}
-
 type TodoHandler struct {
-	store storer
+	model modeler
 }
 
-func NewTodoHandler(store storer) *TodoHandler {
-	return &TodoHandler{store: store}
+func NewTodoHandler(model modeler) *TodoHandler {
+	return &TodoHandler{model: model}
 }
 
 type Context interface {
@@ -29,7 +25,7 @@ func (t *TodoHandler) Create(c Context) {
 		return
 	}
 
-	err := t.store.Create(&todo)
+	err := t.model.Create(&todo)
 	if err != nil {
 		c.Status(http.StatusInternalServerError).JSON(TodoError{Msg: err.Error()})
 		return

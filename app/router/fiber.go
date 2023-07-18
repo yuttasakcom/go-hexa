@@ -33,15 +33,15 @@ func NewFiberHandler(handler func(todo.Context)) fiber.Handler {
 	}
 }
 
-type FiberRouter struct {
+type App struct {
 	*fiber.App
 }
 
-func NewFiberRouter() *FiberRouter {
+func NewApp() *App {
 	app := fiber.New()
-	return &FiberRouter{App: app}
+	return &App{App: app}
 }
 
-func (r *FiberRouter) Post(path string, handler func(todo.Context)) {
+func (r *App) Post(path string, handler func(todo.Context)) {
 	r.App.Post(path, NewFiberHandler(handler))
 }
