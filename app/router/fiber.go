@@ -2,33 +2,33 @@ package router
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/yuttasakcom/go-hexa/app/todo"
+	"github.com/yuttasakcom/go-hexa/app/ctx"
 )
 
-type MyContext struct {
+type FiberContext struct {
 	*fiber.Ctx
 }
 
-func NewMyContext(c *fiber.Ctx) *MyContext {
-	return &MyContext{Ctx: c}
+func NewFiberContext(c *fiber.Ctx) *FiberContext {
+	return &FiberContext{Ctx: c}
 }
 
-func (c *MyContext) Bind(v interface{}) error {
+func (c *FiberContext) Bind(v interface{}) error {
 	return c.Ctx.BodyParser(v)
 }
 
-func (c *MyContext) Status(code int) todo.Context {
+func (c *FiberContext) Status(code int) ctx.Context {
 	c.Ctx.Status(code)
 	return c
 }
 
-func (c *MyContext) JSON(v interface{}) error {
+func (c *FiberContext) JSON(v interface{}) error {
 	return c.Ctx.JSON(v)
 }
 
-func NewFiberHandler(handler func(todo.Context)) fiber.Handler {
+func NewFiberHandler(handler func(ctx.Context)) fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		handler(NewMyContext(c))
+		handler(NewFiberContext(c))
 		return nil
 	}
 }
@@ -42,14 +42,6 @@ func NewFiberApp() *FiberApp {
 	return &FiberApp{App: app}
 }
 
-func (r *FiberApp) Post(path string, handler func(todo.Context)) {
+func (r *FiberApp) Post(path string, handler func(ctx.Context)) {
 	r.App.Post(path, NewFiberHandler(handler))
-}
-
-type FiberRouter struct {
-	fiber.Router
-}
-
-func NewFiberRouter() *FiberRouter {
-	return &FiberRouter{}
 }
