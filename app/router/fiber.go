@@ -45,3 +45,11 @@ func NewFiberApp() *FiberApp {
 func (r *FiberApp) Post(path string, handler func(todo.Context)) {
 	r.App.Post(path, NewFiberHandler(handler))
 }
+
+type FiberRouter struct {
+	fiber.Router
+}
+
+func NewFiberRouter() *FiberRouter {
+	return &FiberRouter{}
+}
