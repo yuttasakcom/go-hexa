@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 
 	"github.com/yuttasakcom/go-hexa/app/config"
@@ -17,6 +18,13 @@ func envFile() string {
 }
 
 func main() {
+	// Liveness Probe
+	_, err := os.Create("/tmp/live")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer os.Remove("/tmp/live")
+
 	cfg := config.NewConfig(envFile())
 	store := database.DatabaseConnect(cfg.PgDB())
 	server.NewServer(cfg, store).Start()
