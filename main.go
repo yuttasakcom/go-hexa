@@ -16,7 +16,6 @@ func envFile() string {
 	}
 }
 
-
 func main() {
 	cfg := config.NewConfig(envFile())
 	db := database.GormStoreConnect(cfg.Db())

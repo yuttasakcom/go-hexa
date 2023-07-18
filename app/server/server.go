@@ -14,14 +14,14 @@ type IServer interface {
 
 type server struct {
 	cfg config.IConfig
-	db *gorm.DB
+	db  *gorm.DB
 	app *router.FiberRouter
 }
 
 func NewServer(cfg config.IConfig, db *gorm.DB) IServer {
 	return &server{
 		cfg: cfg,
-		db: db,
+		db:  db,
 		app: router.NewFiberRouter(),
 	}
 }
