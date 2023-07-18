@@ -9,13 +9,13 @@ import (
 )
 
 type config struct {
-	app *app
-	db  *db
+	app  *app
+	pgDb *pgDB
 }
 
 type IConfig interface {
 	App() *app
-	Db() *db
+	PgDB() *pgDB
 }
 
 func NewConfig(path string) IConfig {
@@ -34,7 +34,7 @@ func NewConfig(path string) IConfig {
 				return p
 			}(),
 		},
-		db: &db{
+		pgDb: &pgDB{
 			host: env["DB_HOST"],
 			port: func() int {
 				p, err := strconv.Atoi(env["DB_PORT"])
@@ -56,8 +56,8 @@ func (c *config) App() *app {
 	return c.app
 }
 
-func (c *config) Db() *db {
-	return c.db
+func (c *config) PgDB() *pgDB {
+	return c.pgDb
 }
 
 type app struct {
@@ -69,7 +69,7 @@ func (a *app) Host() string {
 	return fmt.Sprintf("%s:%d", a.host, a.port)
 }
 
-type db struct {
+type pgDB struct {
 	host     string
 	port     int
 	user     string
@@ -83,7 +83,7 @@ type IDb interface {
 	Url() string
 }
 
-func (d *db) Url() string {
+func (d *pgDB) Url() string {
 	return fmt.Sprintf(
 		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
 		d.host,

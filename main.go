@@ -18,6 +18,6 @@ func envFile() string {
 
 func main() {
 	cfg := config.NewConfig(envFile())
-	store := database.DatabaseConnect(cfg.Db())
+	store := database.DatabaseConnect(cfg.PgDB())
 	server.NewServer(cfg, store).Start()
 }
