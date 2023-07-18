@@ -4,25 +4,21 @@ import (
 	"os"
 
 	"github.com/yuttasakcom/go-hexa/app/config"
-	"github.com/yuttasakcom/go-hexa/app/router"
-	"github.com/yuttasakcom/go-hexa/app/store"
-	"github.com/yuttasakcom/go-hexa/app/todo"
+	"github.com/yuttasakcom/go-hexa/app/database"
+	"github.com/yuttasakcom/go-hexa/app/server"
 )
 
-func main() {
-	cfg := config.NewConfig(envPath())
-	db := store.GormStoreConnect(cfg.Db())
-	r := router.NewFiberRouter()
-	gormStore := store.NewGormStore(db)
-	handler := todo.NewTodoHandler(gormStore)
-	r.Post("/todos", handler.Create)
-	r.Listen(cfg.App().Host())
-}
-
-func envPath() string {
+func envFile() string {
 	if len(os.Args) == 1 {
 		return ".env"
 	} else {
 		return os.Args[1]
 	}
+}
+
+
+func main() {
+	cfg := config.NewConfig(envFile())
+	db := database.GormStoreConnect(cfg.Db())
+	server.NewServer(cfg, db).Start()
 }
