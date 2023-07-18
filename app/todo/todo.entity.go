@@ -1,7 +1,10 @@
 package todo
 
 type Todo struct {
-	ID        int    `json:"id"`
 	Title     string `json:"title"`
 	Completed bool   `json:"completed"`
+}
+
+type TodoError struct {
+	Msg string `json:"msg"`
 }
