@@ -20,6 +20,6 @@ func Register(app *App, db *database.Store) *App {
 	})
 	app.Get("/health", health)
 
-	RegisterTodoRouter(app, db)
+	NewTodoRouter(app, db)
 	return app
 }
