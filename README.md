@@ -4,6 +4,11 @@
 
 ![Go Hexa](https://github.com/yuttasakcom/go-hexa/blob/master/screenshots/go-hexa.png)
 
+## Before run make migrateup
+```bash
+export database=postgres://postgres:password@localhost:5432/go-hexa?sslmode=disable
+```
+
 ## Liveness Probe
 
 ```yaml
