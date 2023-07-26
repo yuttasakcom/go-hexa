@@ -26,6 +26,7 @@ func main() {
 	defer os.Remove("/tmp/live")
 
 	cfg := config.NewConfig(envFile())
-	store := database.DatabaseConnect(cfg.PgDB())
+	// store := database.DatabaseConnect(cfg.PgDB())
+	store := database.DatabaseConnect(cfg.MgDB())
 	server.NewServer(cfg, store).Start()
 }

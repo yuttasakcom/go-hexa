@@ -2,17 +2,23 @@ package database
 
 import (
 	"github.com/yuttasakcom/go-hexa/app/config"
-	"gorm.io/gorm"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func DatabaseConnect(config config.IDb) *Store {
-	return NewStore(GormConnect(config))
+	// return NewGormStore(GormConnect(config))
+	return NewMongoStore(MongoConnect(config))
 }
 
 type Store struct {
-	*gorm.DB
+	// *gorm.DB
+	*mongo.Database
 }
 
-func NewStore(db *gorm.DB) *Store {
-	return &Store{DB: db}
+// func NewGormStore(db *gorm.DB) *Store {
+// 	return &Store{DB: db}
+// }
+
+func NewMongoStore(db *mongo.Database) *Store {
+	return &Store{Database: db}
 }
