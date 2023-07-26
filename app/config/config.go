@@ -35,19 +35,19 @@ func NewConfig(path string) IConfig {
 			}(),
 		},
 		pgDb: &pgDB{
-			host: env["DB_HOST"],
+			host: env["PG_DB_HOST"],
 			port: func() int {
-				p, err := strconv.Atoi(env["DB_PORT"])
+				p, err := strconv.Atoi(env["PG_DB_PORT"])
 				if err != nil {
 					log.Fatalf("Error port fail %v", err)
 				}
 				return p
 			}(),
-			user:     env["DB_USER"],
-			password: env["DB_PASSWORD"],
-			dbname:   env["DB_NAME"],
-			sslmode:  env["DB_SSLMODE"],
-			timezone: env["DB_TIMEZONE"],
+			user:     env["PG_DB_USER"],
+			password: env["PG_DB_PASSWORD"],
+			dbname:   env["PG_DB_NAME"],
+			sslmode:  env["PG_DB_SSLMODE"],
+			timezone: env["PG_DB_TIMEZONE"],
 		},
 	}
 }
