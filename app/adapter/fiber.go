@@ -1,8 +1,8 @@
-package router
+package adapter
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/yuttasakcom/go-hexa/app/ctx"
+	"github.com/yuttasakcom/go-hexa/app/common"
 )
 
 type FiberContext struct {
@@ -10,14 +10,14 @@ type FiberContext struct {
 }
 
 func NewFiberContext(c *fiber.Ctx) *FiberContext {
-	return &FiberContext{Ctx: c}
+	return &FiberContext{c}
 }
 
 func (c *FiberContext) Bind(v interface{}) error {
 	return c.Ctx.BodyParser(v)
 }
 
-func (c *FiberContext) Status(code int) ctx.Context {
+func (c *FiberContext) Status(code int) common.Context {
 	c.Ctx.Status(code)
 	return c
 }
@@ -26,7 +26,7 @@ func (c *FiberContext) JSON(v interface{}) error {
 	return c.Ctx.JSON(v)
 }
 
-func NewFiberHandler(handler func(ctx.Context)) fiber.Handler {
+func NewFiberHandler(handler func(common.Context)) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		handler(NewFiberContext(c))
 		return nil
@@ -42,6 +42,6 @@ func NewFiberApp() *FiberApp {
 	return &FiberApp{App: app}
 }
 
-func (r *FiberApp) Post(path string, handler func(ctx.Context)) {
+func (r *FiberApp) Post(path string, handler func(common.Context)) {
 	r.App.Post(path, NewFiberHandler(handler))
 }

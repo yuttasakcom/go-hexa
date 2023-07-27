@@ -1,4 +1,4 @@
-package ctx
+package common
 
 type Context interface {
 	Bind(v interface{}) error

@@ -1,25 +1,19 @@
 package router
 
 import (
-	"github.com/yuttasakcom/go-hexa/app/ctx"
+	"github.com/yuttasakcom/go-hexa/app"
+	"github.com/yuttasakcom/go-hexa/app/adapter"
+	"github.com/yuttasakcom/go-hexa/app/common"
 	"github.com/yuttasakcom/go-hexa/app/database"
+	"github.com/yuttasakcom/go-hexa/app/todo"
 )
 
-type App struct {
-	*FiberApp
-}
-
-func NewApp() *App {
-	return &App{FiberApp: NewFiberApp()}
-}
-
-func Register(app *App, db *database.Store) *App {
+func Register(app *app.App, db *database.Store) {
 	// Readiness Probe
-	health := NewFiberHandler(func(c ctx.Context) {
+	health := adapter.NewFiberHandler(func(c common.Context) {
 		_ = c.Status(200).SendString("OK")
 	})
 	app.Get("/health", health)
 
-	NewTodoRouter(app, db)
-	return app
+	todo.NewTodoRouter(app, db)
 }

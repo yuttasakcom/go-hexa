@@ -3,7 +3,7 @@ package todo
 import (
 	"net/http"
 
-	"github.com/yuttasakcom/go-hexa/app/ctx"
+	"github.com/yuttasakcom/go-hexa/app/common"
 )
 
 type TodoHandler struct {
@@ -14,7 +14,7 @@ func NewTodoHandler(model modeler) *TodoHandler {
 	return &TodoHandler{model: model}
 }
 
-func (t *TodoHandler) Create(c ctx.Context) {
+func (t *TodoHandler) Create(c common.Context) {
 	var todo Todo
 	if err := c.Bind(&todo); err != nil {
 		c.Status(http.StatusBadRequest).JSON(TodoError{Msg: "Invalid request payload"})

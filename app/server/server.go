@@ -7,6 +7,7 @@ import (
 	"sync"
 	"syscall"
 
+	"github.com/yuttasakcom/go-hexa/app"
 	"github.com/yuttasakcom/go-hexa/app/config"
 	"github.com/yuttasakcom/go-hexa/app/database"
 	"github.com/yuttasakcom/go-hexa/app/router"
@@ -29,7 +30,7 @@ func NewServer(cfg config.IConfig, db *database.Store) IServer {
 }
 
 func (s *Server) Start() {
-	app := router.NewApp()
+	app := app.NewApp()
 
 	wg := new(sync.WaitGroup)
 	wg.Add(2)
