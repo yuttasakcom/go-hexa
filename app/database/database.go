@@ -6,19 +6,19 @@ import (
 )
 
 func DatabaseConnect(config config.IDb) *Store {
-	// return NewGormStore(GormConnect(config))
-	return NewMongoStore(MongoConnect(config))
+	// return NewStore(GormConnect(config))
+	return NewStore(MongoConnect(config))
 }
 
 type Store struct {
-	// *gorm.DB
-	*mongo.Database
+	// *GormDB
+	*MongoDB
 }
 
-// func NewGormStore(db *gorm.DB) *Store {
-// 	return &Store{DB: db}
+// func NewStore(db *gorm.DB) *Store {
+// 	return &Store{&GormDB{db}}
 // }
 
-func NewMongoStore(db *mongo.Database) *Store {
-	return &Store{Database: db}
+func NewStore(db *mongo.Database) *Store {
+	return &Store{&MongoDB{db}}
 }
