@@ -4,8 +4,6 @@ import (
 	"github.com/yuttasakcom/go-hexa/app/database"
 )
 
-// var collectionName = "todos"
-
 type modeler interface {
 	Create(todo *Todo) error
 }
