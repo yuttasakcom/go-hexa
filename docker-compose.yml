@@ -24,6 +24,14 @@ services:
     volumes:
       - mongodb:/data/db
 
+  jaeger:
+    image: docker.io/jaegertracing/all-in-one:1.47.0
+    ports:
+      - "16686:16686"
+      - "14268:14268"
+      - "6832:6832"
+      - "6831:6831"
+
 volumes:
   postgres:
   mongodb:

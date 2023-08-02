@@ -1,8 +1,8 @@
 package app
 
-import "github.com/yuttasakcom/go-hexa/app/adapter"
+import "github.com/yuttasakcom/go-kafka-simple/src/core/adapter"
 
-type IApp interface {
+type Apper interface {
 	Listen(addr string) error
 	Shutdown() error
 }
