@@ -2,7 +2,7 @@ package database
 
 import (
 	slog "github.com/Sellsuki/sellsuki-go-logger"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/config"
+	"github.com/yuttasakcom/go-hexa/src/core/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

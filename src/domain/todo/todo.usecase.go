@@ -3,8 +3,8 @@ package todo
 import (
 	"net/http"
 
-	"github.com/yuttasakcom/go-kafka-simple/src/core/common"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/middleware"
+	"github.com/yuttasakcom/go-hexa/src/core/common"
+	"github.com/yuttasakcom/go-hexa/src/core/middleware"
 	"go.opentelemetry.io/otel"
 )
 

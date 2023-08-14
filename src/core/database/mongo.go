@@ -9,7 +9,7 @@ import (
 
 	slog "github.com/Sellsuki/sellsuki-go-logger"
 	pluralize "github.com/gertd/go-pluralize"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/config"
+	"github.com/yuttasakcom/go-hexa/src/core/config"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )

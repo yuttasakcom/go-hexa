@@ -1,9 +1,10 @@
 package config
 
 import (
-	"log"
+	"os"
 	"strconv"
 
+	slog "github.com/Sellsuki/sellsuki-go-logger"
 	"github.com/joho/godotenv"
 )
 
@@ -19,72 +20,72 @@ type config struct {
 }
 
 func NewConfig(path string) config {
-	env, err := godotenv.Read(path)
+	err := godotenv.Load(path)
 	if err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
+		slog.L().Warn("Error loading .env file: %v", err)
 	}
 
 	return config{
 		app: App{
-			host: env["APP_HOST"],
+			host: os.Getenv("APP_HOST"),
 			port: func() int {
-				p, err := strconv.Atoi(env["APP_PORT"])
+				p, err := strconv.Atoi(os.Getenv("APP_PORT"))
 				if err != nil {
-					log.Fatalf("Error converting APP_PORT to int: %v", err)
+					slog.L().Warn("Error converting APP_PORT to int: %v", err)
 				}
 				return p
 			}(),
 			DebugLog: func() bool {
-				d, err := strconv.ParseBool(env["APP_DEBUG_LOG"])
+				d, err := strconv.ParseBool(os.Getenv("APP_DEBUG_LOG"))
 				if err != nil {
-					log.Fatalf("Error converting APP_DEBUG_LOG to bool: %v", err)
+					slog.L().Warn("Error converting APP_DEBUG_LOG to bool: %v", err)
 				}
 				return d
 			}(),
-			AppName:    env["APP_NAME"],
-			AppVersion: env["APP_VERSION"],
-			AppEnv:     env["APP_ENV"],
+			AppName:    os.Getenv("APP_NAME"),
+			AppVersion: os.Getenv("APP_VERSION"),
+			AppEnv:     os.Getenv("APP_ENV"),
 		},
 		dbConfig: DBConfig{
 			Pg: pgDB{
-				host: env["PG_DB_HOST"],
+				host: os.Getenv("PG_DB_HOST"),
 				port: func() int {
-					p, err := strconv.Atoi(env["PG_DB_PORT"])
+					p, err := strconv.Atoi(os.Getenv("PG_DB_PORT"))
 					if err != nil {
-						log.Fatalf("Error port fail %v", err)
+						slog.L().Warn("Error PG_DB_PORT fail %v", err)
 					}
 					return p
 				}(),
-				user:     env["PG_DB_USER"],
-				password: env["PG_DB_PASSWORD"],
-				dbname:   env["PG_DB_NAME"],
-				sslmode:  env["PG_DB_SSLMODE"],
-				timezone: env["PG_DB_TIMEZONE"],
+				user:     os.Getenv("PG_DB_USER"),
+				password: os.Getenv("PG_DB_PASSWORD"),
+				dbname:   os.Getenv("PG_DB_NAME"),
+				sslmode:  os.Getenv("PG_DB_SSLMODE"),
+				timezone: os.Getenv("PG_DB_TIMEZONE"),
 			},
 			Mg: mgDB{
-				host: env["MG_DB_HOST"],
+				host: os.Getenv("MG_DB_HOST"),
 				port: func() int {
-					p, err := strconv.Atoi(env["MG_DB_PORT"])
+					p, err := strconv.Atoi(os.Getenv("MG_DB_PORT"))
 					if err != nil {
-						log.Fatalf("Error port fail %v", err)
+						slog.L().Warn("Error MG_DB_PORT fail %v", err)
 					}
 					return p
 				}(),
-				user:     env["MG_DB_USER"],
-				password: env["MG_DB_PASSWORD"],
-				dbname:   env["MG_DB_NAME"],
+				user:     os.Getenv("MG_DB_USER"),
+				password: os.Getenv("MG_DB_PASSWORD"),
+				dbname:   os.Getenv("MG_DB_NAME"),
 			},
 		},
 		jaeger: Jaeger{
-			host: env["JAEGER_HOST"],
+			host: os.Getenv("JAEGER_HOST"),
 			port: func() int {
-				p, err := strconv.Atoi(env["JAEGER_PORT"])
+				p, err := strconv.Atoi(os.Getenv("JAEGER_PORT"))
 				if err != nil {
-					log.Fatalf("Error port fail %v", err)
+					slog.L().Warn("Error JAEGER_PORT fail %v", err)
 				}
 				return p
 			}(),
-			uri: env["JAEGER_URI"],
+			uri: os.Getenv("JAEGER_URI"),
 		},
 	}
 }

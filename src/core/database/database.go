@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/yuttasakcom/go-kafka-simple/src/core/config"
+	"github.com/yuttasakcom/go-hexa/src/core/config"
 )
 
 type Store struct {

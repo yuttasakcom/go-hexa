@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	slog "github.com/Sellsuki/sellsuki-go-logger"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/common"
+	"github.com/yuttasakcom/go-hexa/src/core/common"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/propagation"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"

@@ -5,7 +5,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/valyala/fasthttp"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/common"
+	"github.com/yuttasakcom/go-hexa/src/core/common"
 )
 
 type FiberApp struct {

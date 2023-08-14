@@ -1,8 +1,8 @@
 package todo
 
 import (
-	"github.com/yuttasakcom/go-kafka-simple/src/core/app"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/database"
+	"github.com/yuttasakcom/go-hexa/src/core/app"
+	"github.com/yuttasakcom/go-hexa/src/core/database"
 )
 
 func NewTodoRouter(r *app.App, store *database.Store) {

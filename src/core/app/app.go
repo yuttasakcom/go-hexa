@@ -1,6 +1,6 @@
 package app
 
-import "github.com/yuttasakcom/go-kafka-simple/src/core/adapter"
+import "github.com/yuttasakcom/go-hexa/src/core/adapter"
 
 type Apper interface {
 	Listen(addr string) error

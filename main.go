@@ -5,9 +5,9 @@ import (
 	"os"
 
 	slog "github.com/Sellsuki/sellsuki-go-logger"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/common"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/config"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/server"
+	"github.com/yuttasakcom/go-hexa/src/core/common"
+	"github.com/yuttasakcom/go-hexa/src/core/config"
+	"github.com/yuttasakcom/go-hexa/src/core/server"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/exporters/jaeger"

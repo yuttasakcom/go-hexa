@@ -8,13 +8,13 @@ import (
 
 	slog "github.com/Sellsuki/sellsuki-go-logger"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/adapter"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/app"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/common"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/config"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/database"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/middleware"
-	"github.com/yuttasakcom/go-kafka-simple/src/core/router"
+	"github.com/yuttasakcom/go-hexa/src/core/adapter"
+	"github.com/yuttasakcom/go-hexa/src/core/app"
+	"github.com/yuttasakcom/go-hexa/src/core/common"
+	"github.com/yuttasakcom/go-hexa/src/core/config"
+	"github.com/yuttasakcom/go-hexa/src/core/database"
+	"github.com/yuttasakcom/go-hexa/src/core/middleware"
+	"github.com/yuttasakcom/go-hexa/src/core/router"
 )
 
 type Serverer interface {
