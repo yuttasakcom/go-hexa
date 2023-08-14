@@ -1,10 +1,10 @@
 package config
 
 import (
+	"log"
 	"os"
 	"strconv"
 
-	slog "github.com/Sellsuki/sellsuki-go-logger"
 	"github.com/joho/godotenv"
 )
 
@@ -22,7 +22,7 @@ type config struct {
 func NewConfig(path string) config {
 	err := godotenv.Load(path)
 	if err != nil {
-		slog.L().Warn("Error loading .env file: %v", err)
+		log.Printf("Error loading %v\n", path)
 	}
 
 	return config{
@@ -31,14 +31,14 @@ func NewConfig(path string) config {
 			port: func() int {
 				p, err := strconv.Atoi(os.Getenv("APP_PORT"))
 				if err != nil {
-					slog.L().Warn("Error converting APP_PORT to int: %v", err)
+					log.Printf("Error converting APP_PORT to int: %v\n", err)
 				}
 				return p
 			}(),
 			DebugLog: func() bool {
 				d, err := strconv.ParseBool(os.Getenv("APP_DEBUG_LOG"))
 				if err != nil {
-					slog.L().Warn("Error converting APP_DEBUG_LOG to bool: %v", err)
+					log.Printf("Error converting APP_DEBUG_LOG to bool: %v\n", err)
 				}
 				return d
 			}(),
@@ -52,7 +52,7 @@ func NewConfig(path string) config {
 				port: func() int {
 					p, err := strconv.Atoi(os.Getenv("PG_DB_PORT"))
 					if err != nil {
-						slog.L().Warn("Error PG_DB_PORT fail %v", err)
+						log.Printf("Error PG_DB_PORT fail %v\n", err)
 					}
 					return p
 				}(),
@@ -67,7 +67,7 @@ func NewConfig(path string) config {
 				port: func() int {
 					p, err := strconv.Atoi(os.Getenv("MG_DB_PORT"))
 					if err != nil {
-						slog.L().Warn("Error MG_DB_PORT fail %v", err)
+						log.Printf("Error MG_DB_PORT fail %v\n", err)
 					}
 					return p
 				}(),
@@ -81,7 +81,7 @@ func NewConfig(path string) config {
 			port: func() int {
 				p, err := strconv.Atoi(os.Getenv("JAEGER_PORT"))
 				if err != nil {
-					slog.L().Warn("Error JAEGER_PORT fail %v", err)
+					log.Printf("Error JAEGER_PORT fail %v\n", err)
 				}
 				return p
 			}(),
