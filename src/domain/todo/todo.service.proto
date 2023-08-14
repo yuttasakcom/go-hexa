@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package todo;
+
+option go_package = "github.com/yuttasakcom/go-hex/src/domain/todo";
+
+
+message CreateTodoRequest {
+    string title = 1;
+}
+
+message CreateTodoResponse {
+    string result = 1;
+}
+
+service CreateTodoService {
+    rpc CreateTodo (CreateTodoRequest) returns (CreateTodoResponse);
+}

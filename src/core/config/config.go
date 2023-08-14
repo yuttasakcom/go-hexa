@@ -35,6 +35,13 @@ func NewConfig(path string) config {
 				}
 				return p
 			}(),
+			grpc_port: func() int {
+				p, err := strconv.Atoi(os.Getenv("APP_GRPC_PORT"))
+				if err != nil {
+					log.Printf("Error converting APP_GRPC_PORT to int: %v\n", err)
+				}
+				return p
+			}(),
 			DebugLog: func() bool {
 				d, err := strconv.ParseBool(os.Getenv("APP_DEBUG_LOG"))
 				if err != nil {

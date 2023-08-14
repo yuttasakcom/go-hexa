@@ -29,8 +29,6 @@ func main() {
 	initTracer(cfg)
 
 	server.NewServer(cfg).Start()
-	// @TODO: start worker
-	// @TODO: start gRPC server
 }
 
 func initLogger(cfg config.App) {

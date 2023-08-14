@@ -22,7 +22,7 @@ func (t *TodoHandler) Create(c common.Ctx) {
 	_, span := tracer.Start(middleware.GetSpanContext(c), "todo.usecase.Create")
 	defer span.End()
 
-	var todo Todo
+	var todo TodoEntity
 	if err := c.Bind(&todo); err != nil {
 		c.Status(http.StatusBadRequest).JSON(TodoError{Msg: "Invalid request payload"})
 		return

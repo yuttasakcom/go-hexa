@@ -1,6 +1,6 @@
 package todo
 
-type Todo struct {
+type TodoEntity struct {
 	Title string `json:"title"`
 }
 
